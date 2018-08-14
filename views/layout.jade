@@ -3,5 +3,10 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src="/lib/jquery/dist/jquery.js")
+    link(rel='stylesheet', href='/lib/bootstrap/dist/css/bootstrap.css')
+    script(src="/lib/bootstrap/dist/js/bootstrap.js")
   body
-    block content
+    include navbar.jade
+    div(class="container")
+     block content
