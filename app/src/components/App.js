@@ -14,8 +14,9 @@ class App extends Component {
           <NavigationBar/>
           <br/>
           <Switch>
-            <Route path="/rooms/:room" component={RoomPage}/>
-            <Route path="/" component={DashboardPage}/>
+            <Route exact path="/" render={()=><Redirect to="/rooms"/>}/>
+            <Route exact path="/rooms" component={DashboardPage}/>
+            <Route path="/:room" component={RoomPage}/>
           </Switch>
         </div>
       </Router>
