@@ -20,7 +20,7 @@ exports.up = function (db, callback) {
     device_id: {
       type: "int", foreignKey: {
         name: 'activity_device_id_fk',
-        table: 'activities',
+        table: 'devices',
         rules: {
           onDelete: 'CASCADE'
         },

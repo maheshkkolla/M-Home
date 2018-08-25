@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.scss';
 import NavigationBar from "./navbar/NavigationBar";
 import DashboardPage from "./dashboard/DashboardPage";
-import {BrowserRouter as Router, Route, Link, Switch, Redirect} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import RoomPage from "./room/RoomPage";
 
 class App extends Component {
