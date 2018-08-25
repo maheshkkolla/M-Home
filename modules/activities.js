@@ -5,5 +5,8 @@ export default {
     return db.select().from("activities")
       .where({device_id: deviceId})
       .orderBy("at", "desc").limit(1);
+  },
+  create: (data) => {
+    return db("activities").insert(data);
   }
 }

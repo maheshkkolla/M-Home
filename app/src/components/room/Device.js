@@ -9,12 +9,18 @@ export default class Device extends React.Component {
 
   constructor() {
     super();
-    this.state = {toggleActive: false};
+    this.state = {status: false};
     this.onToggle = this.onToggle.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      status: (nextProps.recent_activity.action === "ON")
+    });
+  }
+
   onToggle() {
-    this.setState({toggleActive: !this.state.toggleActive});
+    this.props.onToggle({ id: this.props.id, action: !this.state.status});
   }
 
   render() {
@@ -29,7 +35,7 @@ export default class Device extends React.Component {
                   onClick={this.onToggle}
                   size="xs"
                   offstyle="danger"
-                  active={this.state.toggleActive}
+                  active={this.state.status}
                 />
               </div>
             </CardTitle>

@@ -1,5 +1,6 @@
 import express from "express";
 import roomsRoutes from "./rooms";
+import activitiesRoutes from "./activities";
 
 const router = express.Router();
 
@@ -9,5 +10,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.use("/rooms", roomsRoutes);
+
+router.use("/activities", activitiesRoutes);
 
 export default router;

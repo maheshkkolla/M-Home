@@ -1,20 +1,42 @@
 import React from "react";
 import Device from "./Device";
-import {Jumbotron, Container, Row, Col} from "reactstrap";
+import {Jumbotron, Container, Row} from "reactstrap";
 
 export default class RoomPage extends React.Component {
 
   constructor() {
     super();
-    this.state = {
-      name: "My-Room",
-      devices: [{ name: "Light", status: true}, {name: "Fan", status: false}]
-    };
+    this.state = {};
+    this.onDeviceToggle = this.onDeviceToggle.bind(this);
+    this.onFetchSuccess = this.onFetchSuccess.bind(this);
+    this.setData = this.setData.bind(this);
+    this.onDeviceTogglePostSuccess = this.onDeviceTogglePostSuccess.bind(this);
   }
 
   componentDidMount() {
-    // fetch()
-    // {this.props.match.params.room}
+    fetch(`/rooms/${this.props.match.params.roomId}`).then(this.onFetchSuccess);
+  }
+
+  onFetchSuccess(response) {
+    response.json().then(this.setData)
+  }
+
+  setData(data) {
+    this.setState(data)
+  }
+
+  onDeviceTogglePostSuccess(response) {
+    window.location.reload();
+  }
+
+  onDeviceToggle(details) {
+    fetch("/activities/new", {
+      method: "POST",
+      body: JSON.stringify(details),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(this.onDeviceTogglePostSuccess)
   }
 
   render() {
@@ -25,7 +47,7 @@ export default class RoomPage extends React.Component {
           <h3> {this.state.description || ""} </h3>
         </Jumbotron>
         <Row>
-          {this.state.devices.map((device) => <Device {...device}/>)}
+          {this.state.devices.map((device) => <Device {...device} onToggle={this.onDeviceToggle}/>)}
         </Row>
       </Container>
     );
