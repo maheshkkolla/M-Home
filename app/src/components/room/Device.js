@@ -11,11 +11,20 @@ export default class Device extends React.Component {
     super();
     this.state = {status: false};
     this.onToggle = this.onToggle.bind(this);
+    this.setStatusOnPropsChange = this.setStatusOnPropsChange.bind(this);
+  }
+
+  componentWillMount() {
+    this.setStatusOnPropsChange(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
+    this.setStatusOnPropsChange(nextProps);
+  }
+
+  setStatusOnPropsChange(props) {
     this.setState({
-      status: (nextProps.recent_activity.action === "ON")
+      status: (props.recent_activity ? props.recent_activity.action === "ON" : false)
     });
   }
 

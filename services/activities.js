@@ -5,13 +5,13 @@ import MQTTService from "./MQTTService";
 export default {
   getRecent: (devices) => {
     return Promise.all(devices.map((device) => {
-      return activitiesModule.getRecent(device.id).then(result => result[0]);
+      return activitiesModule.getRecent(device.id).then(result =>  result[0] ? result[0] : {});
     })).then(activities => activities);
   },
 
   newAction: (data) => {
     return devicesServices.getMCDetails(data.id).then(function (mcDetails) {
-      return MQTTService.publish(Object.assign(mcDetails, data.action));
+      return MQTTService.publish(Object.assign(mcDetails, {action: data.action}));
     })
   },
 
@@ -19,7 +19,7 @@ export default {
     return activitiesModule.create({
       device_id: data.deviceId,
       action: data.action ? "ON" : "OFF",
-      at: new Date().toString()
+      at: new Date().toISOString()
     });
   }
 }

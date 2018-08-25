@@ -8,7 +8,7 @@ export default {
         username: process.env.MQTT_USERNAME,
         password: process.env.MQTT_PASSWORD
       });
-      const message = {pin: data.pin, action: data.action};
+      const message = {pin: data.pin, action: data.action, deviceId: data.deviceId};
       client.publish(data.routingKey, JSON.stringify(message), {qos: 1}, (err, data) => {
         if (err) {
           reject(err);
@@ -24,7 +24,7 @@ export default {
       username: process.env.MQTT_USERNAME,
       password: process.env.MQTT_PASSWORD
     });
-    client.on("connecnt", () => {
+    client.on("connect", () => {
       client.subscribe("M-Home-activity");
     });
 
@@ -38,7 +38,9 @@ export default {
         }
       }
 
-      activitiesService.create(parseMessage(message))
+      activitiesService.create(parseMessage(message)).catch((error) => {
+        console.error("Error while inserting into activities: ", error);
+      });
     });
 
   }

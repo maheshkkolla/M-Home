@@ -6,7 +6,7 @@ export default class RoomPage extends React.Component {
 
   constructor() {
     super();
-    this.state = {};
+    this.state = {show: false};
     this.onDeviceToggle = this.onDeviceToggle.bind(this);
     this.onFetchSuccess = this.onFetchSuccess.bind(this);
     this.setData = this.setData.bind(this);
@@ -22,7 +22,8 @@ export default class RoomPage extends React.Component {
   }
 
   setData(data) {
-    this.setState(data)
+    this.setState(data);
+    this.setState({show: true});
   }
 
   onDeviceTogglePostSuccess(response) {
@@ -40,16 +41,25 @@ export default class RoomPage extends React.Component {
   }
 
   render() {
-    return (
-      <Container>
-        <Jumbotron className="text-center">
-          <h1> {this.state.name} </h1>
-          <h3> {this.state.description || ""} </h3>
-        </Jumbotron>
-        <Row>
-          {this.state.devices.map((device) => <Device {...device} onToggle={this.onDeviceToggle}/>)}
-        </Row>
-      </Container>
-    );
+    if (this.state.show) {
+      return (
+        <Container>
+          <Jumbotron className="text-center">
+            <h1> {this.state.name} </h1>
+            <h3> {this.state.description || ""} </h3>
+          </Jumbotron>
+          <Row>
+            {this.state.devices.map((device) => <Device {...device} onToggle={this.onDeviceToggle}/>)}
+          </Row>
+        </Container>
+      );
+    } else {
+      return (
+        <Container>
+          Loading...
+        </Container>
+      );
+    }
+
   }
 }

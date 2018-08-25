@@ -29,7 +29,7 @@ export default class DashboardPage extends React.Component {
     return(
       <Container>
         <Row className="rooms">
-          { this.state.rooms.map((room) => <RoomCard key={room.name} {...room} />) }
+          { this.state.rooms.map((room) => <RoomCard key={room.routing_key} {...room} />) }
           <AddNewRoom />
         </Row>
       </Container>
