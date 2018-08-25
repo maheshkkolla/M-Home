@@ -14,7 +14,7 @@ export default class RoomPage extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/rooms/${this.props.match.params.roomId}`).then(this.onFetchSuccess);
+    fetch(`/api/rooms/${this.props.match.params.roomId}`).then(this.onFetchSuccess);
   }
 
   onFetchSuccess(response) {
@@ -31,7 +31,7 @@ export default class RoomPage extends React.Component {
   }
 
   onDeviceToggle(details) {
-    fetch("/activities/new", {
+    fetch("/api/activities/new", {
       method: "POST",
       body: JSON.stringify(details),
       headers: {

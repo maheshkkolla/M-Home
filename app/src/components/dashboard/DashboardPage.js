@@ -18,7 +18,7 @@ export default class DashboardPage extends React.Component {
   }
 
   componentDidMount() {
-    fetch("/rooms").then(this.onFetchSuccess);
+    fetch("/api/rooms").then(this.onFetchSuccess);
   }
 
   onFetchSuccess(response) {
