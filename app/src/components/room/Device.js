@@ -2,8 +2,7 @@ import React from "react";
 import {
   Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle
 } from 'reactstrap';
-import Toggle from "react-bootstrap-toggle";
-
+import Switch from "react-bootstrap-switch";
 
 export default class Device extends React.Component {
 
@@ -40,11 +39,9 @@ export default class Device extends React.Component {
             <CardTitle>
               {this.props.name}
               <div className="float-right">
-                <Toggle
-                  onClick={this.onToggle}
-                  size="xs"
-                  offstyle="danger"
-                  active={this.state.status}
+                <Switch
+                  onChange={this.onToggle}
+                  value={this.state.status}
                 />
               </div>
             </CardTitle>

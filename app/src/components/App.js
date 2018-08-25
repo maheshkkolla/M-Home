@@ -4,6 +4,7 @@ import NavigationBar from "./navbar/NavigationBar";
 import DashboardPage from "./dashboard/DashboardPage";
 import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import RoomPage from "./room/RoomPage";
+import "react-bootstrap-switch/dist/css/bootstrap3/react-bootstrap-switch.min.css";
 
 class App extends Component {
   render() {
