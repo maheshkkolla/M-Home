@@ -20,6 +20,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/lib", express.static(__dirname + "/node_modules"));
 
+app.get("/ping", function(req, res, next) {
+  res.send("pong");
+});
+
 app.use("/api", apiRoutes);
 
 if (process.env.NODE_ENV === "production") {

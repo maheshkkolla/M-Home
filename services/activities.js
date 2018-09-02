@@ -10,7 +10,7 @@ export default {
   },
 
   newAction: (data) => {
-    return devicesServices.getMCDetails(data.id).then(function (mcDetails) {
+    return devicesServices.getMCDetails(data.id).then((mcDetails) => {
       return MQTTService.publish(Object.assign(mcDetails, {action: data.action}));
     })
   },
